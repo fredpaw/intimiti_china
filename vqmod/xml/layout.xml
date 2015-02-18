@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>layout</id>
+    <version>1.0</version>
+    <vqmver>2.X</vqmver>
+    <author>Fred Zhou</author>
+	
+	<!-- Header -->
+    <file name="catalog/controller/common/header.php">
+        <operation>
+            <search position="after"><![CDATA[
+            $data['text_all'] = $this->language->get('text_all');
+            ]]></search>
+            <add><![CDATA[
+            $data['text_contact'] = $this->language->get('text_contact');
+            
+            $this->load->model('catalog/information');
+
+		$data['informations'] = array();
+
+		foreach ($this->model_catalog_information->getInformations() as $result) {
+				$data['informations'][] = array(
+					'title' => $result['title'],
+					'href'  => $this->url->link('information/information', 'information_id=' . $result['information_id'])
+				);
+		}
+            ]]></add>
+        </operation>
+    </file>
+    
+	<!-- Footer -->
+	<file name="catalog/language/english/common/footer.php">
+		<operation info="Add info into footer">
+			<search position="after"><![CDATA[
+			$_['text_powered']      = 'Powered By <a href="http://www.opencart.com">OpenCart</a><br /> %s &copy; %s';
+			]]></search>
+			<add><![CDATA[
+			$_['text_follow']      = 'Follow Us';
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/language/chinese/common/footer.php">
+		<operation info="Add info into footer">
+			<search position="after"><![CDATA[
+			$_['text_powered']      = '技术支持 <a href="http://www.opencart.com">OpenCart</a><br /> %s &copy; %s';
+			]]></search>
+			<add><![CDATA[
+			$_['text_follow']      = '关注微信';
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/common/footer.php">
+		<operation info="Add info into footer">
+			<search position="after"><![CDATA[
+			$data['text_newsletter'] = $this->language->get('text_newsletter');
+			]]></search>
+			<add><![CDATA[
+			$data['text_follow'] = $this->language->get('text_follow');
+			]]></add>
+		</operation>
+	</file>
+    <file name="catalog/controller/common/footer.php">
+        <operation>
+            <search position="before"><![CDATA[
+            if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/footer.tpl')) {
+            ]]></search>
+            <add><![CDATA[
+            // Menu
+		$this->load->model('catalog/category');
+
+		$this->load->model('catalog/product');
+
+		$data['categories'] = array();
+
+		$categories = $this->model_catalog_category->getCategories(0);
+
+		foreach ($categories as $category) {
+			if ($category['top']) {
+				// Level 2
+				$children_data = array();
+
+				$children = $this->model_catalog_category->getCategories($category['category_id']);
+
+				foreach ($children as $child) {
+					$filter_data = array(
+						'filter_category_id'  => $child['category_id'],
+						'filter_sub_category' => true
+					);
+
+					$children_data[] = array(
+						'name'  => $child['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProducts($filter_data) . ')' : ''),
+						'href'  => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id'])
+					);
+				}
+
+				// Level 1
+				$data['categories'][] = array(
+					'name'     => $category['name'],
+					'children' => $children_data,
+					'column'   => $category['column'] ? $category['column'] : 1,
+					'href'     => $this->url->link('product/category', 'path=' . $category['category_id'])
+				);
+			}
+		}
+            ]]></add>
+        </operation>
+    </file>
+	
+	<!-- Product -->
+	<file name="catalog/language/english/product/product.php">
+		<operation info="Add info into product page">
+			<search position="after"><![CDATA[
+			$_['text_year']                = 'year';
+			]]></search>
+			<add><![CDATA[
+			$_['text_single']              = 'Single Purchase';
+			$_['text_subscription']        = 'Annual Subscription';
+			$_['text_price_symbol']        = '$';
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/language/chinese/product/product.php">
+		<operation info="Add info into product page">
+			<search position="after"><![CDATA[
+			$_['text_year'] = '年';
+			]]></search>
+			<add><![CDATA[
+			$_['text_single']         = '体验性购买';
+			$_['text_subscription']   = '一年订购';
+			$_['text_price_symbol']   = '￥';
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/product/product.php">
+		<operation info="Add info into product page">
+			<search position="after"><![CDATA[
+			$data['text_loading'] = $this->language->get('text_loading');
+			]]></search>
+			<add><![CDATA[
+			$data['text_single'] = $this->language->get('text_single');
+			$data['text_subscription'] = $this->language->get('text_subscription');
+			$data['text_price_symbol'] = $this->language->get('text_price_symbol');
+			]]></add>
+		</operation>
+	</file>
+</modification>

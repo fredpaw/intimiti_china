@@ -1,0 +1,30 @@
+---------- Date: 2015-01-30 15:35:30 ~ IP : ::1 ----------
+REQUEST URI : /intimiti_cn/m001
+MOD DETAILS:
+   modFile   : D:\xampp\htdocs\intimiti_cn\vqmod/xml/layout.xml
+   id        : layout
+   version   : 1.0
+   vqmver    : 2.X
+   author    : Fred Zhou
+
+File Name    : catalog/language/english/product/product.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $_['text_year']           = '年';
+
+----------------------------------------------------------------------
+
+
+---------- Date: 2015-01-30 15:38:46 ~ IP : ::1 ----------
+REQUEST URI : /intimiti_cn/m001
+MOD DETAILS:
+   modFile   : D:\xampp\htdocs\intimiti_cn\vqmod/xml/layout.xml
+   id        : layout
+   version   : 1.0
+   vqmver    : 2.X
+   author    : Fred Zhou
+
+File Name    : catalog/language/chinese/product/product.php(0)
+VQModObject::applyMod - SEARCH NOT FOUND (ABORTING MOD): $_['text_year']           = '年';
+
+----------------------------------------------------------------------
+
+

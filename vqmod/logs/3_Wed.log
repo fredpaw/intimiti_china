@@ -1,0 +1,7 @@
+---------- Date: 2015-02-18 01:18:39 ~ IP : ::1 ----------
+REQUEST URI : /intimiti_china/
+VQMod::_parseMods - INVALID XML FILE: : Input is not proper UTF-8, indicate encoding !
+Bytes: 0xCC 0xED 0xBC 0xD3 in file:///D:/xampp/htdocs/intimiti_china/vqmod/xml/products_subscription.xml, line: 10
+----------------------------------------------------------------------
+
+

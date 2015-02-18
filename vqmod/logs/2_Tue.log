@@ -1,0 +1,42 @@
+---------- Date: 2015-02-17 02:06:22 ~ IP : ::1 ----------
+REQUEST URI : /china/admin/index.php?route=sale/order/info&token=b58a9fa4d5490b0e74698cc85190fd27&order_id=3
+VQMod::_parseMods - INVALID XML FILE: : Input is not proper UTF-8, indicate encoding !
+Bytes: 0xCC 0xED 0xBC 0xD3 in file:///G:/xampp/htdocs/china/vqmod/xml/products_subscription.xml, line: 22
+----------------------------------------------------------------------
+
+
+---------- Date: 2015-02-17 02:09:18 ~ IP : ::1 ----------
+REQUEST URI : /china/admin/index.php?route=sale/order&token=b58a9fa4d5490b0e74698cc85190fd27
+VQMod::_parseMods - INVALID XML FILE: : Input is not proper UTF-8, indicate encoding !
+Bytes: 0xCC 0xED 0xBC 0xD3 in file:///G:/xampp/htdocs/china/vqmod/xml/products_subscription.xml, line: 22
+----------------------------------------------------------------------
+
+
+---------- Date: 2015-02-17 02:20:47 ~ IP : ::1 ----------
+REQUEST URI : /china/admin/index.php?route=sale/order&token=b58a9fa4d5490b0e74698cc85190fd27
+VQMod::_parseMods - INVALID XML FILE: : Input is not proper UTF-8, indicate encoding !
+Bytes: 0xCC 0xED 0xBC 0xD3 in file:///G:/xampp/htdocs/china/vqmod/xml/products_subscription.xml, line: 18
+----------------------------------------------------------------------
+
+
+---------- Date: 2015-02-17 02:27:42 ~ IP : ::1 ----------
+REQUEST URI : /china/admin/index.php?route=sale/order&token=b58a9fa4d5490b0e74698cc85190fd27
+VQMod::_parseMods - INVALID XML FILE: : Input is not proper UTF-8, indicate encoding !
+Bytes: 0xCC 0xED 0xBC 0xD3 in file:///G:/xampp/htdocs/china/vqmod/xml/products_subscription.xml, line: 10
+----------------------------------------------------------------------
+
+
+---------- Date: 2015-02-17 02:29:13 ~ IP : ::1 ----------
+REQUEST URI : /china/admin/index.php?route=sale/order&token=b58a9fa4d5490b0e74698cc85190fd27
+VQMod::_parseMods - INVALID XML FILE: : Input is not proper UTF-8, indicate encoding !
+Bytes: 0xCC 0xED 0xBC 0xD3 in file:///G:/xampp/htdocs/china/vqmod/xml/products_subscription.xml, line: 10
+----------------------------------------------------------------------
+
+
+---------- Date: 2015-02-17 02:39:23 ~ IP : ::1 ----------
+REQUEST URI : /china/admin/index.php?route=sale/order&token=b58a9fa4d5490b0e74698cc85190fd27
+VQMod::_parseMods - INVALID XML FILE: : Input is not proper UTF-8, indicate encoding !
+Bytes: 0xCC 0xED 0xBC 0xD3 in file:///G:/xampp/htdocs/china/vqmod/xml/products_subscription.xml, line: 10
+----------------------------------------------------------------------
+
+

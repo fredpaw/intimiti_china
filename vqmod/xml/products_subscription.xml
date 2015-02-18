@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>Products Subscription</id>
+    <version>1.0.0</version>
+    <vqmver>2.5.0</vqmver>
+    <author>Fred Zhou</author>
+
+	<file name="admin/language/chinese/sale/order.php">
+        <operation>
+            <search position="before"><![CDATA[$_['text_history']                            = '添加订单记录';]]></search>
+            <add><![CDATA[$_['text_processing']                            = '处理中';]]></add>
+        </operation>
+    </file> 
+
+</modification>

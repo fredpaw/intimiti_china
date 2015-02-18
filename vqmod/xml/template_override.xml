@@ -1,0 +1,358 @@
+<modification>
+	<id>Category/product/information template override</id>
+	<version>1.5.x</version>
+	<vqmver>2.2.1</vqmver>
+	<author>kodecube.com</author>
+	<file name="admin/controller/catalog/information.php">
+		<operation error="skip">
+			<search position="before"><![CDATA[$data['entry_description']]]></search>
+			<add><![CDATA[$data['entry_tpl'] = $this->language->get('entry_tpl');
+			
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="before"><![CDATA[$data['stores']]]></search>
+			<add><![CDATA[
+			
+		
+			
+			
+			 $files = glob(DIR_CATALOG . 'view/theme/override/information/*.tpl');
+			 
+		if ($files) {
+			foreach ($files as $file) {
+				$extension = basename($file);
+				
+			
+				$data['tpls'][] = array(	
+				'name'       => $extension,
+				);
+				
+				}
+				}
+
+		
+			
+			if (isset($this->request->post['tpl'])) {
+      		$data['tpl'] = $this->request->post['tpl'];
+    	} elseif (isset($information_info)) {
+      		$data['tpl'] = $information_info['tpl'];
+    	} else {
+			$data['tpl'] = 0;
+		}
+		
+
+		
+		
+		]]></add>
+		</operation>
+	</file>
+		<file name="catalog/model/catalog/information.php">
+		<operation error="skip">
+			<search position="before"><![CDATA['parent_id'              => $query->row['parent_id'],]]></search>
+			<add><![CDATA['tpl'              => $query->row['tpl'], ]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/language/english/catalog/information.php">
+		<operation error="skip">
+			<search position="before"><![CDATA[$_['heading_title']]]></search>
+			<add><![CDATA[$_['entry_tpl']          = '<span title="" data-toggle="tooltip" data-original-title="Force a Template on Information">TEMPLATE</span>';
+			
+			
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/model/catalog/information.php">
+		<operation error="skip">
+			<search position="replace"><![CDATA[sort_order = '" . (int)$data['sort_order'] . "',]]></search>
+			<add><![CDATA[sort_order = '" . (int)$data['sort_order'] . "', tpl = '" . $this->db->escape($data['tpl']) . "', 
+]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/catalog/information_form.tpl">
+		<operation error="skip">
+			<search position="after"><![CDATA[<div class="tab-pane" id="tab-data">]]></search>
+			<add><![CDATA[
+			
+			
+	 <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-model"><?php echo $entry_tpl; ?></label>
+                <div class="col-sm-10">
+                 <select name="tpl">
+				 <option value="" ><?php echo "--None--"; ?></option>
+           <?php foreach($tpls as $tplname){ ?>
+                <option value="<?php echo $tplname['name']; ?>" <?php if ($tplname['name']==$tpl) { ?> selected="selected" <?php }; ?> ><?php echo $tplname['name']; ?>
+				
+				</option>
+           <?php }?>
+		     </select>
+                 
+                </div>
+              </div>
+			  
+			  
+			  		
+	
+]]></add>
+		</operation>
+	</file>
+	 <file name="catalog/controller/information/information.php">
+        <operation error="skip">
+            <search position="replace"><![CDATA[if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/information/information.tpl')) {]]></search>
+            <add><![CDATA[
+			if ($information_info['tpl']) {
+                $data['tpl'] = $information_info['tpl'];
+            } else {
+                $data['tpl'] = 0;
+				}
+				
+
+
+			
+			
+			if (file_exists(DIR_TEMPLATE . 'override/information/' . ($data['tpl']))) {
+			$this->response->setOutput($this->load->view('override/information/' . ($data['tpl']), $data));
+               
+            } elseif (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/information/information.tpl')) {]]></add>
+        </operation>
+    </file>
+
+	<file name="admin/controller/catalog/category.php">
+		<operation error="skip">
+			<search position="before"><![CDATA[$data['entry_top']]]></search>
+			<add><![CDATA[$data['entry_tpl'] = $this->language->get('entry_tpl');
+			
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="before"><![CDATA[if (isset($this->request->post['parent_id'])) {]]></search>
+			<add><![CDATA[
+			
+		
+			
+			
+			 $files = glob(DIR_CATALOG . 'view/theme/override/category/*.tpl');
+			 
+		if ($files) {
+			foreach ($files as $file) {
+				$extension = basename($file);
+				
+			
+				$data['tpls'][] = array(	
+				'name'       => $extension,
+				);
+				
+				}
+				}
+
+		
+			
+			if (isset($this->request->post['tpl'])) {
+      		$data['tpl'] = $this->request->post['tpl'];
+    	} elseif (isset($category_info)) {
+      		$data['tpl'] = $category_info['tpl'];
+    	} else {
+			$data['tpl'] = 0;
+		}
+		
+
+		
+		
+		]]></add>
+		</operation>
+	</file>
+		<file name="catalog/model/catalog/category.php">
+		<operation error="skip">
+			<search position="before"><![CDATA['parent_id'              => $query->row['parent_id'],]]></search>
+			<add><![CDATA['tpl'              => $query->row['tpl'], ]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/language/english/catalog/category.php">
+		<operation error="skip">
+			<search position="before"><![CDATA[$_['heading_title']]]></search>
+			<add><![CDATA[$_['entry_tpl']          = '<span title="" data-toggle="tooltip" data-original-title="Force a Template on Category">TEMPLATE</span>';
+			
+			
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/model/catalog/category.php">
+		<operation error="skip">
+			<search position="replace"><![CDATA[parent_id = '" . (int)$data['parent_id'] . "',]]></search>
+			<add><![CDATA[parent_id = '" . (int)$data['parent_id'] . "', tpl = '" . $this->db->escape($data['tpl']) . "', 
+]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/catalog/category_form.tpl">
+		<operation error="skip">
+			<search position="after"><![CDATA[<div class="tab-pane fade" id="tab-data">]]></search>
+			<add><![CDATA[
+			
+			
+	 <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-model"><?php echo $entry_tpl; ?></label>
+                <div class="col-sm-10">
+                 <select name="tpl">
+				 <option value="" ><?php echo $text_none; ?></option>
+           <?php foreach($tpls as $tplname){ ?>
+                <option value="<?php echo $tplname['name']; ?>" <?php if ($tplname['name']==$tpl) { ?> selected="selected" <?php }; ?> ><?php echo $tplname['name']; ?>
+				
+				</option>
+           <?php }?>
+		     </select>
+                 
+                </div>
+              </div>
+			  
+			  
+			  		
+	
+]]></add>
+		</operation>
+	</file>
+	 <file name="catalog/controller/product/category.php">
+        <operation error="skip">
+            <search position="replace"><![CDATA[if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/product/category.tpl')) {]]></search>
+            <add><![CDATA[
+			if ($category_info['tpl']) {
+                $data['tpl'] = $category_info['tpl'];
+            } else {
+                $data['tpl'] = 0;
+				}
+				
+
+		
+
+				
+		
+
+			
+			
+			if (file_exists(DIR_TEMPLATE . 'override/category/' . ($data['tpl']))) {
+			$this->response->setOutput($this->load->view('override/category/' . ($data['tpl']), $data));
+               
+            } elseif (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/product/category.tpl')) {]]></add>
+        </operation>
+    </file>
+
+<file name="admin/controller/catalog/product.php">
+		<operation error="skip">
+			<search position="before"><![CDATA[$data['entry_minimum']]]></search>
+			<add><![CDATA[$data['entry_tpl'] = $this->language->get('entry_tpl');
+			
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="before"><![CDATA[if (isset($this->request->post['minimum'])) {]]></search>
+			<add><![CDATA[
+			
+		
+			
+			
+			 $files = glob(DIR_CATALOG . 'view/theme/override/product/*.tpl');
+			 
+		if ($files) {
+			foreach ($files as $file) {
+				$extension = basename($file);
+				
+			
+				$data['tpls'][] = array(	
+				'name'       => $extension,
+				);
+				
+				}
+				}
+
+		
+			
+			if (isset($this->request->post['tpl'])) {
+      		$data['tpl'] = $this->request->post['tpl'];
+    	} elseif (isset($product_info)) {
+      		$data['tpl'] = $product_info['tpl'];
+    	} else {
+			$data['tpl'] = 0;
+		}
+		
+
+		
+		
+		]]></add>
+		</operation>
+	</file>
+		<file name="catalog/model/catalog/product.php">
+		<operation error="skip">
+			<search position="before"><![CDATA['sku'              => $query->row['sku'],]]></search>
+			<add><![CDATA['tpl'              => $query->row['tpl'], ]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/language/english/catalog/product.php">
+		<operation error="skip">
+			<search position="before"><![CDATA[$_['entry_minimum']]]></search>
+			<add><![CDATA[$_['entry_tpl']          = '<span title="" data-toggle="tooltip" data-original-title="Force a Template on Product">TEMPLATE</span>';
+			
+			
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/model/catalog/product.php">
+		<operation error="skip">
+			<search position="replace"><![CDATA[tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "',]]></search>
+			<add><![CDATA[tax_class_id = '" . $this->db->escape($data['tax_class_id']) . "', tpl = '" . $this->db->escape($data['tpl']) . "', 
+]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/catalog/product_form.tpl">
+		<operation error="skip">
+			<search position="after"><![CDATA[<div class="tab-pane" id="tab-data">]]></search>
+			<add><![CDATA[
+			
+			
+	 <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-model"><?php echo $entry_tpl; ?></label>
+                <div class="col-sm-10">
+                 <select name="tpl">
+				 <option value="" ><?php echo $text_none; ?></option>
+           <?php foreach($tpls as $tplname){ ?>
+                <option value="<?php echo $tplname['name']; ?>" <?php if ($tplname['name']==$tpl) { ?> selected="selected" <?php }; ?> ><?php echo $tplname['name']; ?>
+				
+				</option>
+           <?php }?>
+		     </select>
+                 
+                </div>
+              </div>
+			  
+			  
+			  		
+	
+]]></add>
+		</operation>
+	</file>
+	 <file name="catalog/controller/product/product.php">
+        <operation error="skip">
+            <search position="replace"><![CDATA[if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/product/product.tpl')) {]]></search>
+            <add><![CDATA[
+			if ($product_info['tpl']) {
+                $data['tpl'] = $product_info['tpl'];
+            } else {
+                $data['tpl'] = 0;
+				}
+				
+
+		
+
+				
+		
+
+			
+			
+			if (file_exists(DIR_TEMPLATE . 'override/product/' . ($data['tpl']))) {
+			$this->response->setOutput($this->load->view('override/product/' . ($data['tpl']), $data));
+               
+            } elseif (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/product/product.tpl')) {]]></add>
+        </operation>
+    </file>
+	</modification>
