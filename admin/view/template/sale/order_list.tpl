@@ -136,13 +136,13 @@
                     <input type="checkbox" name="selected[]" value="<?php echo $order['order_id']; ?>" />
                     <?php } ?>
                     <input type="hidden" name="shipping_code[]" value="<?php echo $order['shipping_code']; ?>" /></td>
-                  <td class="text-right"><?php echo $order['order_id']; ?></td>
+                  <td class="text-right"><?php echo $order['order_id']; ?><input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>"/></td>
                   <td class="text-left"><?php echo $order['customer']; ?></td>
                   <td class="text-left"><?php echo $order['status']; ?></td>
                   <td class="text-right"><?php echo $order['total']; ?></td>
                   <td class="text-left"><?php echo $order['date_added']; ?></td>
                   <td class="text-left"><?php echo $order['date_modified']; ?></td>
-                  <td class="text-right"><?php if($order['status'] == $text_processing): ?><a href="<?php echo $order['manager']; ?>" data-toggle="tooltip" title="<?php echo $button_processing; ?>" class="btn btn-danger"><i class="fa fa-check"></i></a> <?php else : ?><a href="<?php echo $order['view']; ?>" data-toggle="tooltip" title="<?php echo $button_view; ?>" class="btn btn-info"><i class="fa fa-eye"></i></a> <?php endif; ?><a href="<?php echo $order['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a> <a href="<?php echo $order['delete']; ?>" id="button-delete<?php echo $order['order_id']; ?>" data-toggle="tooltip" title="<?php echo $button_delete; ?>" class="btn btn-danger"><i class="fa fa-trash-o"></i></a></td>
+                  <td class="text-right"><?php if($order['status'] == $text_processing): ?><button type="submit" id="button-split" data-loading-text="Loading" class="btn btn-primary" ><i class="fa fa-check"></i></a> <?php else : ?><a href="<?php echo $order['view']; ?>" data-toggle="tooltip" title="<?php echo $button_view; ?>" class="btn btn-info"><i class="fa fa-eye"></i></button> <?php endif; ?><a href="<?php echo $order['edit']; ?>" data-toggle="tooltip" title="<?php echo $button_edit; ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a> <a href="<?php echo $order['delete']; ?>" id="button-delete<?php echo $order['order_id']; ?>" data-toggle="tooltip" title="<?php echo $button_delete; ?>" class="btn btn-danger"><i class="fa fa-trash-o"></i></a></td>
                 </tr>
                 <?php } ?>
                 <?php } else { ?>
@@ -162,6 +162,37 @@
     </div>
   </div>
   <script type="text/javascript"><!--
+$('#button-split').on('click', function() {
+	$.ajax({
+		url:'index.php?route=sale/split/add&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request),
+		type: 'post',
+		data: $(''),
+		dataType: 'json',
+		beforeSend: function() {
+			$('#button-shipping-address').button('loading');
+		},
+		complete: function() {
+			$('#button-shipping-address').button('reset');
+		},
+		success: function(json) {
+			$('.alert, .text-danger').remove();
+			$('.form-group').removeClass('has-error');
+			
+			// Check for errors
+			if (json['error']) {
+										
+			}
+			
+			if (json['success'] {
+				
+			}
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
+
 $('#button-filter').on('click', function() {
 	url = 'index.php?route=sale/order&token=<?php echo $token; ?>';
 	
